@@ -40,17 +40,36 @@ class Detail extends StatelessWidget {
                   SizedBox(
                     height: 15,
                   ),
-                  Text(
-                    vegetables!.name,
-                    style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              vegetables!.name,
+                              style: TextStyle(
+                                  fontSize: 50, fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              vegetables!.category,
+                              style: TextStyle(fontSize: 25),
+                            )
+                          ],
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {},
+                        child: Icon(
+                          Icons.favorite_outline,
+                          size: 50,
+                        ),
+                      )
+                    ],
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    vegetables!.category,
-                    style: TextStyle(fontSize: 25),
-                  )
                 ],
               ),
             ),
@@ -134,17 +153,36 @@ class Detail extends StatelessWidget {
                   SizedBox(
                     height: 15,
                   ),
-                  Text(
-                    herbals!.name,
-                    style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              herbals!.name,
+                              style: TextStyle(
+                                  fontSize: 50, fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              herbals!.category,
+                              style: TextStyle(fontSize: 25),
+                            )
+                          ],
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {},
+                        child: Icon(
+                          Icons.favorite_outline,
+                          size: 50,
+                        ),
+                      )
+                    ],
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    herbals!.category,
-                    style: TextStyle(fontSize: 25),
-                  )
                 ],
               ),
             ),
