@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:plants/model/herbal.dart';
+import 'package:plants/model/vegetables.dart';
 
 import 'detail.dart';
 
@@ -7,15 +9,17 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget gridItemCard() {
+    Widget gridItemCard(Vegetables vegetables) {
       return GestureDetector(
         onTap: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return const Detail();
+            return Detail(
+              vegetables: vegetables,
+            );
           }));
         },
         child: Card(
-          margin: EdgeInsets.all(10),
+          margin: const EdgeInsets.all(10),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5),
           ),
@@ -24,24 +28,26 @@ class HomeScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
-                child: Image.asset(
-                  'assets/vegetables/carrot.jpg',
+                child: Center(
+                  child: Image.asset(
+                    vegetables.imageAsset,
+                  ),
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(left: 10),
+                margin: const EdgeInsets.only(left: 10),
                 child: Text(
-                  'Carrot',
-                  style: TextStyle(fontSize: 20),
+                  vegetables.name,
+                  style: const TextStyle(fontSize: 20),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 8,
               ),
               Container(
-                margin: EdgeInsets.only(left: 10),
+                margin: const EdgeInsets.only(left: 10),
                 child: Text(
-                  'The carrot is a root vegetable, typically orange in color, though purple, black, red, white, and yellow cultivars exist, all of which are domesticated forms of the wild carrot, native to Europe and Southwestern Asia.',
+                  vegetables.detail,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
@@ -51,16 +57,18 @@ class HomeScreen extends StatelessWidget {
       );
     }
 
-    Widget listItemCard() {
+    Widget listItemCard(Herbal herbals) {
       return GestureDetector(
         onTap: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return const Detail();
+            return Detail(
+              herbals: herbals,
+            );
           }));
         },
         child: Card(
           margin: EdgeInsets.symmetric(
-            vertical: 20,
+            vertical: 10,
             horizontal: 10,
           ),
           shape: RoundedRectangleBorder(
@@ -72,14 +80,14 @@ class HomeScreen extends StatelessWidget {
               SizedBox(
                 width: 16,
               ),
-              const Expanded(
+              Expanded(
                 flex: 2,
-                child: Text('Lavender'),
+                child: Text(herbals.name),
               ),
               Expanded(
                 flex: 1,
                 child: Image.asset(
-                  'assets/herbal/lavender.jpg',
+                  herbals.imageAsset,
                 ),
               )
             ],
@@ -118,10 +126,17 @@ class HomeScreen extends StatelessWidget {
           children: [
             GridView.count(
               crossAxisCount: 2,
-              children: [gridItemCard(), gridItemCard()],
+              children: List.generate(vegetableLists.length, (index) {
+                final Vegetables vegetables = vegetableLists[index];
+                return gridItemCard(vegetables);
+              }),
             ),
-            ListView(
-              children: [listItemCard()],
+            ListView.builder(
+              itemBuilder: (context, index) {
+                final Herbal herbals = listHerbal[index];
+                return listItemCard(herbals);
+              },
+              itemCount: listHerbal.length,
             ),
           ],
         ),
