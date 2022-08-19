@@ -92,6 +92,7 @@ class _DetailState extends State<Detail> {
               top: MediaQuery.of(context).size.height * 0.42,
               left: 0,
               right: 0,
+              bottom: 0,
               child: Column(
                 children: [
                   Container(
@@ -111,10 +112,8 @@ class _DetailState extends State<Detail> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 200,
+                  Expanded(
                     child: ListView(
-                      shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
                       children: widget.vegetables!.imageUrl.map((e) {
                         return Container(
@@ -216,6 +215,7 @@ class _DetailState extends State<Detail> {
               top: MediaQuery.of(context).size.height * 0.42,
               left: 0,
               right: 0,
+              bottom: 0,
               child: Column(
                 children: [
                   Container(
@@ -235,8 +235,7 @@ class _DetailState extends State<Detail> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 200,
+                  Expanded(
                     child: ListView(
                       scrollDirection: Axis.horizontal,
                       children: widget.herbals!.imageUrl.map((e) {
@@ -257,7 +256,7 @@ class _DetailState extends State<Detail> {
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       );
