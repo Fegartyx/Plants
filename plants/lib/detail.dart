@@ -3,11 +3,17 @@ import 'package:flutter/material.dart';
 import 'model/herbal.dart';
 import 'model/vegetables.dart';
 
-class Detail extends StatelessWidget {
+class Detail extends StatefulWidget {
   Herbal? herbals;
   Vegetables? vegetables;
   Detail({this.herbals, this.vegetables});
 
+  @override
+  State<Detail> createState() => _DetailState();
+}
+
+class _DetailState extends State<Detail> {
+  bool isFavorite = false;
   @override
   Widget build(BuildContext context) {
     Widget vegetable(Vegetables vegetable) {
@@ -16,7 +22,7 @@ class Detail extends StatelessWidget {
           clipBehavior: Clip.none, // agar tidak overlaps
           children: [
             Image.asset(
-              vegetables!.imageAsset,
+              widget.vegetables!.imageAsset,
               width: double.infinity,
               height: 450,
               fit: BoxFit.fill,
@@ -47,7 +53,7 @@ class Detail extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              vegetables!.name,
+                              widget.vegetables!.name,
                               style: TextStyle(
                                   fontSize: 50, fontWeight: FontWeight.bold),
                             ),
@@ -55,17 +61,26 @@ class Detail extends StatelessWidget {
                               height: 10,
                             ),
                             Text(
-                              vegetables!.category,
+                              widget.vegetables!.category,
                               style: TextStyle(fontSize: 25),
                             )
                           ],
                         ),
                       ),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          setState(() {
+                            isFavorite == false
+                                ? isFavorite = true
+                                : isFavorite = false;
+                          });
+                        },
                         child: Icon(
-                          Icons.favorite_outline,
+                          isFavorite == true
+                              ? Icons.favorite
+                              : Icons.favorite_outline,
                           size: 50,
+                          color: isFavorite == true ? Colors.red : Colors.black,
                         ),
                       )
                     ],
@@ -77,45 +92,47 @@ class Detail extends StatelessWidget {
               top: MediaQuery.of(context).size.height * 0.42,
               left: 0,
               right: 0,
-              child: Container(
-                margin: const EdgeInsets.all(15),
-                child: Card(
-                  color: Colors.orangeAccent,
-                  child: Center(
-                    child: Padding(
-                      padding: EdgeInsets.all(15),
-                      child: Text(
-                        vegetables!.detail,
-                        style: TextStyle(
-                          fontSize: 20,
+              child: Column(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.all(15),
+                    child: Card(
+                      color: Colors.orangeAccent,
+                      child: Center(
+                        child: Padding(
+                          padding: EdgeInsets.all(15),
+                          child: Text(
+                            widget.vegetables!.detail,
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ),
-            ),
-            Positioned(
-              top: MediaQuery.of(context).size.height * 0.5,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: vegetables!.imageUrl.map((e) {
-                  return Container(
-                    alignment: Alignment.center,
-                    padding: EdgeInsets.symmetric(horizontal: 15),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Image.network(
-                        e,
-                        height: MediaQuery.of(context).size.height * 0.2,
-                        fit: BoxFit.cover,
-                      ),
+                  SizedBox(
+                    height: 200,
+                    child: ListView(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      children: widget.vegetables!.imageUrl.map((e) {
+                        return Container(
+                          alignment: Alignment.center,
+                          padding: EdgeInsets.symmetric(horizontal: 15),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Image.network(
+                              e,
+                              height: MediaQuery.of(context).size.height * 0.2,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        );
+                      }).toList(),
                     ),
-                  );
-                }).toList(),
+                  ),
+                ],
               ),
             )
           ],
@@ -129,7 +146,7 @@ class Detail extends StatelessWidget {
           clipBehavior: Clip.none, // agar tidak overlaps
           children: [
             Image.asset(
-              herbals!.imageAsset,
+              widget.herbals!.imageAsset,
               width: double.infinity,
               height: 450,
               fit: BoxFit.fill,
@@ -160,7 +177,7 @@ class Detail extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              herbals!.name,
+                              widget.herbals!.name,
                               style: TextStyle(
                                   fontSize: 50, fontWeight: FontWeight.bold),
                             ),
@@ -168,17 +185,26 @@ class Detail extends StatelessWidget {
                               height: 10,
                             ),
                             Text(
-                              herbals!.category,
+                              widget.herbals!.category,
                               style: TextStyle(fontSize: 25),
                             )
                           ],
                         ),
                       ),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          setState(() {
+                            isFavorite == false
+                                ? isFavorite = true
+                                : isFavorite = false;
+                          });
+                        },
                         child: Icon(
-                          Icons.favorite_outline,
+                          isFavorite == true
+                              ? Icons.favorite
+                              : Icons.favorite_outline,
                           size: 50,
+                          color: isFavorite == true ? Colors.red : Colors.black,
                         ),
                       )
                     ],
@@ -190,45 +216,46 @@ class Detail extends StatelessWidget {
               top: MediaQuery.of(context).size.height * 0.42,
               left: 0,
               right: 0,
-              child: Container(
-                margin: const EdgeInsets.all(15),
-                child: Card(
-                  color: Colors.orangeAccent,
-                  child: Center(
-                    child: Padding(
-                      padding: EdgeInsets.all(15),
-                      child: Text(
-                        herbals!.detail,
-                        style: TextStyle(
-                          fontSize: 20,
+              child: Column(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.all(15),
+                    child: Card(
+                      color: Colors.orangeAccent,
+                      child: Center(
+                        child: Padding(
+                          padding: EdgeInsets.all(15),
+                          child: Text(
+                            widget.herbals!.detail,
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ),
-            ),
-            Positioned(
-              top: MediaQuery.of(context).size.height * 0.5,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: herbals!.imageUrl.map((e) {
-                  return Container(
-                    alignment: Alignment.center,
-                    padding: EdgeInsets.symmetric(horizontal: 15),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Image.network(
-                        e,
-                        height: MediaQuery.of(context).size.height * 0.2,
-                        fit: BoxFit.cover,
-                      ),
+                  SizedBox(
+                    height: 200,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: widget.herbals!.imageUrl.map((e) {
+                        return Container(
+                          alignment: Alignment.center,
+                          padding: EdgeInsets.symmetric(horizontal: 15),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Image.network(
+                              e,
+                              height: MediaQuery.of(context).size.height * 0.2,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        );
+                      }).toList(),
                     ),
-                  );
-                }).toList(),
+                  ),
+                ],
               ),
             )
           ],
@@ -238,6 +265,8 @@ class Detail extends StatelessWidget {
 
     return Scaffold(
         backgroundColor: const Color(0xffF1F0F2),
-        body: herbals == null ? vegetable(vegetables!) : herbal(herbals!));
+        body: widget.herbals == null
+            ? vegetable(widget.vegetables!)
+            : herbal(widget.herbals!));
   }
 }
