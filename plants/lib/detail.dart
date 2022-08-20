@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plants/button_favorite.dart';
 
 import 'model/herbal.dart';
 import 'model/vegetables.dart';
@@ -67,22 +68,7 @@ class _DetailState extends State<Detail> {
                           ],
                         ),
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            isFavorite == false
-                                ? isFavorite = true
-                                : isFavorite = false;
-                          });
-                        },
-                        child: Icon(
-                          isFavorite == true
-                              ? Icons.favorite
-                              : Icons.favorite_outline,
-                          size: 50,
-                          color: isFavorite == true ? Colors.red : Colors.black,
-                        ),
-                      )
+                      ButtonFavorite(favorite: isFavorite)
                     ],
                   ),
                 ],
@@ -190,22 +176,7 @@ class _DetailState extends State<Detail> {
                           ],
                         ),
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            isFavorite == false
-                                ? isFavorite = true
-                                : isFavorite = false;
-                          });
-                        },
-                        child: Icon(
-                          isFavorite == true
-                              ? Icons.favorite
-                              : Icons.favorite_outline,
-                          size: 50,
-                          color: isFavorite == true ? Colors.red : Colors.black,
-                        ),
-                      )
+                      ButtonFavorite(favorite: isFavorite)
                     ],
                   ),
                 ],
