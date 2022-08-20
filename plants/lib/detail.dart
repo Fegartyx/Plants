@@ -4,16 +4,11 @@ import 'package:plants/button_favorite.dart';
 import 'model/herbal.dart';
 import 'model/vegetables.dart';
 
-class Detail extends StatefulWidget {
+class Detail extends StatelessWidget {
   Herbal? herbals;
   Vegetables? vegetables;
   Detail({this.herbals, this.vegetables});
 
-  @override
-  State<Detail> createState() => _DetailState();
-}
-
-class _DetailState extends State<Detail> {
   bool isFavorite = false;
   @override
   Widget build(BuildContext context) {
@@ -23,7 +18,7 @@ class _DetailState extends State<Detail> {
           clipBehavior: Clip.none, // agar tidak overlaps
           children: [
             Image.asset(
-              widget.vegetables!.imageAsset,
+              vegetables!.imageAsset,
               width: double.infinity,
               height: 450,
               fit: BoxFit.fill,
@@ -54,7 +49,7 @@ class _DetailState extends State<Detail> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              widget.vegetables!.name,
+                              vegetables!.name,
                               style: TextStyle(
                                   fontSize: 50, fontWeight: FontWeight.bold),
                             ),
@@ -62,7 +57,7 @@ class _DetailState extends State<Detail> {
                               height: 10,
                             ),
                             Text(
-                              widget.vegetables!.category,
+                              vegetables!.category,
                               style: TextStyle(fontSize: 25),
                             )
                           ],
@@ -89,7 +84,7 @@ class _DetailState extends State<Detail> {
                         child: Padding(
                           padding: EdgeInsets.all(15),
                           child: Text(
-                            widget.vegetables!.detail,
+                            vegetables!.detail,
                             style: TextStyle(
                               fontSize: 20,
                             ),
@@ -101,7 +96,7 @@ class _DetailState extends State<Detail> {
                   Expanded(
                     child: ListView(
                       scrollDirection: Axis.horizontal,
-                      children: widget.vegetables!.imageUrl.map((e) {
+                      children: vegetables!.imageUrl.map((e) {
                         return Container(
                           alignment: Alignment.center,
                           padding: EdgeInsets.symmetric(horizontal: 15),
@@ -131,7 +126,7 @@ class _DetailState extends State<Detail> {
           clipBehavior: Clip.none, // agar tidak overlaps
           children: [
             Image.asset(
-              widget.herbals!.imageAsset,
+              herbals!.imageAsset,
               width: double.infinity,
               height: 450,
               fit: BoxFit.fill,
@@ -162,7 +157,7 @@ class _DetailState extends State<Detail> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              widget.herbals!.name,
+                              herbals!.name,
                               style: TextStyle(
                                   fontSize: 50, fontWeight: FontWeight.bold),
                             ),
@@ -170,7 +165,7 @@ class _DetailState extends State<Detail> {
                               height: 10,
                             ),
                             Text(
-                              widget.herbals!.category,
+                              herbals!.category,
                               style: TextStyle(fontSize: 25),
                             )
                           ],
@@ -197,7 +192,7 @@ class _DetailState extends State<Detail> {
                         child: Padding(
                           padding: EdgeInsets.all(15),
                           child: Text(
-                            widget.herbals!.detail,
+                            herbals!.detail,
                             style: TextStyle(
                               fontSize: 20,
                             ),
@@ -209,7 +204,7 @@ class _DetailState extends State<Detail> {
                   Expanded(
                     child: ListView(
                       scrollDirection: Axis.horizontal,
-                      children: widget.herbals!.imageUrl.map((e) {
+                      children: herbals!.imageUrl.map((e) {
                         return Container(
                           alignment: Alignment.center,
                           padding: EdgeInsets.symmetric(horizontal: 15),
@@ -235,8 +230,6 @@ class _DetailState extends State<Detail> {
 
     return Scaffold(
         backgroundColor: const Color(0xffF1F0F2),
-        body: widget.herbals == null
-            ? vegetable(widget.vegetables!)
-            : herbal(widget.herbals!));
+        body: herbals == null ? vegetable(vegetables!) : herbal(herbals!));
   }
 }
